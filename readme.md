@@ -4,7 +4,6 @@ This test suite was created using Robot automation framework. The goal is to reg
 The required libraries are specified in the requirements.txt, the user should be able to install the requirements.txt easily.
 ### Approach:
 - Tool and language: Robot Framework + Python
-
 ## Code Organisation
 Code is created using Robot Framework and Python was used to automated the scenarios mentioned above. The test scripts are located in the Test suites directory organized according to the test types. 
 

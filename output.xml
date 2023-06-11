@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.6 on darwin)" generated="20230611 14:16:50.867" rpa="false" schemaversion="3">
+<suite id="s1" name="Robots" source="/Users/psuresh/git/BirthdayReminder/TestSuites/Regression/robots">
+<suite id="s1-s1" name="regressionResponceData" source="/Users/psuresh/git/BirthdayReminder/TestSuites/Regression/robots/regressionResponceData.robot">
+<test id="s1-s1-t1" name="Do a GET Request and validate the response code for valid data" line="21">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:51.063" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:51.063" endtime="20230611 14:16:51.064"/>
+</kw>
+<for flavor="IN">
+<var>${units}</var>
+<value>${unitHour}</value>
+<value>${unitDay}</value>
+<value>${unitWeek}</value>
+<value>${unitMonth}</value>
+<iter>
+<var name="${units}">hour</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${units}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:52.145" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:52.145" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '30', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:52 GMT', 'x-amzn-RequestId': '2437a07e-5969-4706-8d33-cb41a3543091', 'x-amz-apigw-id': 'GWJ_gHnDjoEF_zA=', 'X-Amzn-Trace-Id': 'Root=1-648589fc-20b84a7a1868df176466b291;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 a8b26a870e896cf36ea8a2a41f8e6348.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'SP7e29ASOt91_nhINLB0shDDgS8TrjaqTBBohzeV66sMMW3AHp5mDg=='} 
+ body={"message": "3384 hours left"} 
+ </msg>
+<msg timestamp="20230611 14:16:52.145" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:51.064" endtime="20230611 14:16:52.146"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:52.146" endtime="20230611 14:16:52.146"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.text}</arg>
+<arg>${units}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230611 14:16:52.146" endtime="20230611 14:16:52.147"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:51.064" endtime="20230611 14:16:52.147"/>
+</iter>
+<iter>
+<var name="${units}">day</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${units}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:52.668" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:52.668" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '28', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:53 GMT', 'x-amzn-RequestId': 'b02097a8-46c7-4688-ad4e-621cc9e9c462', 'x-amz-apigw-id': 'GWJ_mF8xjoEFS9Q=', 'X-Amzn-Trace-Id': 'Root=1-648589fd-619823bd69593a8e6044c516;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 a8b26a870e896cf36ea8a2a41f8e6348.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'CTi_iqu7KC02bpNNG1XmD2Ram7DfDaTpXMiWbZlsOCU3jULXAFC8-A=='} 
+ body={"message": "141 days left"} 
+ </msg>
+<msg timestamp="20230611 14:16:52.668" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:52.147" endtime="20230611 14:16:52.668"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:52.668" endtime="20230611 14:16:52.668"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.text}</arg>
+<arg>${units}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230611 14:16:52.668" endtime="20230611 14:16:52.669"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:52.147" endtime="20230611 14:16:52.669"/>
+</iter>
+<iter>
+<var name="${units}">week</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${units}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:53.148" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=week 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=week 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:53.148" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=week 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '28', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:53 GMT', 'x-amzn-RequestId': 'bc515652-55a7-4364-a53e-dd8a46497db4', 'x-amz-apigw-id': 'GWJ_rHgUDoEF2Kw=', 'X-Amzn-Trace-Id': 'Root=1-648589fd-1791e28b02b4b7db747b7f4c;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 a8b26a870e896cf36ea8a2a41f8e6348.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'SGNdk3ZLWTovXQ7q5kjoYEMUBFZPgL7gQlswPoenhdb-uu1x7iORKw=='} 
+ body={"message": "20 weeks left"} 
+ </msg>
+<msg timestamp="20230611 14:16:53.149" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:52.669" endtime="20230611 14:16:53.149"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:53.149" endtime="20230611 14:16:53.149"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.text}</arg>
+<arg>${units}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230611 14:16:53.149" endtime="20230611 14:16:53.150"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:52.669" endtime="20230611 14:16:53.150"/>
+</iter>
+<iter>
+<var name="${units}">month</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${units}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:53.885" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=month 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=month 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:53.885" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=month 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '28', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:54 GMT', 'x-amzn-RequestId': '0de0f11d-3343-46b0-b2f2-c2f80eee9e26', 'x-amz-apigw-id': 'GWJ_wGvdDoEFTVw=', 'X-Amzn-Trace-Id': 'Root=1-648589fe-549025841c3f155854078d5e;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 a8b26a870e896cf36ea8a2a41f8e6348.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'fBuwQSnNMZG2xDKYHw5ie8WoK8Sa_adEWOTo0jZQCLGqNEhzhgOVNQ=='} 
+ body={"message": "4 months left"} 
+ </msg>
+<msg timestamp="20230611 14:16:53.885" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:53.150" endtime="20230611 14:16:53.885"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:53.885" endtime="20230611 14:16:53.885"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.text}</arg>
+<arg>${units}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230611 14:16:53.886" endtime="20230611 14:16:53.886"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:53.150" endtime="20230611 14:16:53.886"/>
+</iter>
+<status status="PASS" starttime="20230611 14:16:51.064" endtime="20230611 14:16:53.886"/>
+</for>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionDataUnits</tag>
+<status status="PASS" starttime="20230611 14:16:51.062" endtime="20230611 14:16:53.887"/>
+</test>
+<test id="s1-s1-t2" name="Do a GET Request and validate the response code for valid data (+10 From Today)" line="31">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:53.888" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:53.887" endtime="20230611 14:16:53.888"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${bdate}</var>
+<arg>UTC</arg>
+<arg>+10 days</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:16:53.888" level="INFO">${bdate} = 2023-06-21</msg>
+<status status="PASS" starttime="20230611 14:16:53.888" endtime="20230611 14:16:53.888"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=${bdate}&amp;unit=${unitDay}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:54.587" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2023-06-21&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=2023-06-21&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:54.588" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2023-06-21&amp;unit=day 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:55 GMT', 'x-amzn-RequestId': '223e22cf-1d12-4a8d-894a-97172906e4f8', 'x-amz-apigw-id': 'GWJ_5GEUDoEFjvA=', 'X-Amzn-Trace-Id': 'Root=1-648589ff-0ddbfad61e6e9f2717a341e3;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 570e7526491451bf97ab73c18f44c2f8.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'hg8FmtkxyjpB6RYr-9frrVzPvctVl3e6OjMLWMS7zGWT3Td9eWs1Pw=='} 
+ body={"message": "10 days left"} 
+ </msg>
+<msg timestamp="20230611 14:16:54.588" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:53.888" endtime="20230611 14:16:54.588"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:54.588" endtime="20230611 14:16:54.588"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>{"message": "${diffInDays} days left"}</arg>
+<arg>${response.text}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230611 14:16:54.588" endtime="20230611 14:16:54.589"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230611 14:16:54.589" endtime="20230611 14:16:54.590"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionDataPositiveDateDiff</tag>
+<status status="PASS" starttime="20230611 14:16:53.887" endtime="20230611 14:16:54.590"/>
+</test>
+<test id="s1-s1-t3" name="Do a GET Request and validate the response code for valid data (-10 From Today)" line="41">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:54.591" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:54.591" endtime="20230611 14:16:54.591"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${bdate}</var>
+<arg>UTC</arg>
+<arg>-10 days</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:16:54.592" level="INFO">${bdate} = 2023-06-01</msg>
+<status status="PASS" starttime="20230611 14:16:54.592" endtime="20230611 14:16:54.592"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${tdate}</var>
+<arg>UTC</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:16:54.594" level="INFO">${tdate} = 2023-06-11</msg>
+<status status="PASS" starttime="20230611 14:16:54.593" endtime="20230611 14:16:54.594"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${nextyear}</var>
+<arg>UTC</arg>
+<arg>result_format=%Y</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:16:54.594" level="INFO">${nextyear} = 2023</msg>
+<status status="PASS" starttime="20230611 14:16:54.594" endtime="20230611 14:16:54.594"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${nextyear}</var>
+<arg>${nextyear} +1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230611 14:16:54.595" level="INFO">${nextyear} = 2024</msg>
+<status status="PASS" starttime="20230611 14:16:54.595" endtime="20230611 14:16:54.595"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${leap}</var>
+<arg>${nextyear} % 4</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230611 14:16:54.596" level="INFO">${leap} = 0</msg>
+<status status="PASS" starttime="20230611 14:16:54.595" endtime="20230611 14:16:54.596"/>
+</kw>
+<kw name="Subtract Date From Date" library="DateTime">
+<var>${timeleft}</var>
+<arg>${tdate}</arg>
+<arg>${bdate}</arg>
+<arg>exclude_millis=True</arg>
+<doc>Subtracts date from another date and returns time between.</doc>
+<msg timestamp="20230611 14:16:54.598" level="INFO">${timeleft} = 864000.0</msg>
+<status status="PASS" starttime="20230611 14:16:54.596" endtime="20230611 14:16:54.598"/>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<var>${daysleft}</var>
+<arg>${timeleft}</arg>
+<arg>result_format=%d</arg>
+<doc>Converts between supported `date formats`.</doc>
+<msg timestamp="20230611 14:16:54.599" level="INFO">${daysleft} = 11</msg>
+<status status="PASS" starttime="20230611 14:16:54.599" endtime="20230611 14:16:54.599"/>
+</kw>
+<if>
+<branch type="IF" condition="${Leap} == 0">
+<kw name="Evaluate" library="BuiltIn">
+<var>${days}</var>
+<arg>366 - ${daysleft} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230611 14:16:54.600" level="INFO">${days} = 356</msg>
+<status status="PASS" starttime="20230611 14:16:54.599" endtime="20230611 14:16:54.600"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:54.599" endtime="20230611 14:16:54.600"/>
+</branch>
+<branch type="ELSE">
+<kw name="Evaluate" library="BuiltIn">
+<var>${days}</var>
+<arg>365 - ${daysleft} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230611 14:16:54.600" endtime="20230611 14:16:54.600"/>
+</kw>
+<status status="NOT RUN" starttime="20230611 14:16:54.600" endtime="20230611 14:16:54.600"/>
+</branch>
+<status status="PASS" starttime="20230611 14:16:54.599" endtime="20230611 14:16:54.600"/>
+</if>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=${bdate}&amp;unit=${unitDay}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:55.319" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2023-06-01&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=2023-06-01&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:55.319" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2023-06-01&amp;unit=day 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '28', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:55 GMT', 'x-amzn-RequestId': '8177f3ca-f0ce-4d18-96d2-78d0a759d912', 'x-amz-apigw-id': 'GWKAAG_bDoEF6xQ=', 'X-Amzn-Trace-Id': 'Root=1-648589ff-5d072f3b373988994fb9446c;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 175ad1930803ff9b27aa38a792abcb68.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'USkknkR9tql3qw63J2QoyRZoEUKoGLuODKETH-LnZDq63at-CZwl7A=='} 
+ body={"message": "356 days left"} 
+ </msg>
+<msg timestamp="20230611 14:16:55.320" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:54.600" endtime="20230611 14:16:55.320"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:55.320" endtime="20230611 14:16:55.320"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>{"message": "${days} days left"}</arg>
+<arg>${response.text}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230611 14:16:55.320" endtime="20230611 14:16:55.321"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionDataPositiveDateDiff</tag>
+<status status="PASS" starttime="20230611 14:16:54.590" endtime="20230611 14:16:55.321"/>
+</test>
+<test id="s1-s1-t4" name="Do a GET Request and validate the response code for valid data (+10 Months From Today)" line="61">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:55.322" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:55.322" endtime="20230611 14:16:55.322"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${days}</var>
+<arg>${diffInMonths} * 30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230611 14:16:55.323" level="INFO">${days} = 300</msg>
+<status status="PASS" starttime="20230611 14:16:55.323" endtime="20230611 14:16:55.323"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${bdate}</var>
+<arg>UTC</arg>
+<arg>+${days} days</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:16:55.323" level="INFO">${bdate} = 2024-04-06</msg>
+<status status="PASS" starttime="20230611 14:16:55.323" endtime="20230611 14:16:55.323"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=${bdate}&amp;unit=${unitMonth}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:55.995" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2024-04-06&amp;unit=month 
+ path_url=/Prod/next-birthday?dateofbirth=2024-04-06&amp;unit=month 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:55.995" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2024-04-06&amp;unit=month 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '29', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:56 GMT', 'x-amzn-RequestId': '98f572e9-4234-4c97-b28c-da4ad1581e66', 'x-amz-apigw-id': 'GWKAHEIBDoEFQgQ=', 'X-Amzn-Trace-Id': 'Root=1-64858a00-276e645d3872e1c65b71b136;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 fcc5d2d615e3904d2f9b279dd96de872.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'egEaUcJ3bja0TFEt1DrdMHBtjelnFuVwlqOrDQ_QAWoPNCvLXO0elw=='} 
+ body={"message": "10 months left"} 
+ </msg>
+<msg timestamp="20230611 14:16:55.995" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:55.324" endtime="20230611 14:16:55.995"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:55.996" endtime="20230611 14:16:55.996"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>{"message": "${diffInMonths} ${unitMonth}s left"}</arg>
+<arg>${response.text}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230611 14:16:55.996" endtime="20230611 14:16:55.997"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230611 14:16:55.997" endtime="20230611 14:16:55.998"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionDataPositiveMonthDiff</tag>
+<status status="PASS" starttime="20230611 14:16:55.321" endtime="20230611 14:16:55.998"/>
+</test>
+<test id="s1-s1-t5" name="Do a GET Request and validate the response code for valid data (+10 Weeks From Today)" line="72">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:55.999" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:55.999" endtime="20230611 14:16:55.999"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${days}</var>
+<arg>${diffInWeeks} * 7</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230611 14:16:56.000" level="INFO">${days} = 70</msg>
+<status status="PASS" starttime="20230611 14:16:55.999" endtime="20230611 14:16:56.000"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${bdate}</var>
+<arg>UTC</arg>
+<arg>+${days} days</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:16:56.000" level="INFO">${bdate} = 2023-08-20</msg>
+<status status="PASS" starttime="20230611 14:16:56.000" endtime="20230611 14:16:56.000"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=${bdate}&amp;unit=${unitWeek}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:56.396" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2023-08-20&amp;unit=week 
+ path_url=/Prod/next-birthday?dateofbirth=2023-08-20&amp;unit=week 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:56.396" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=2023-08-20&amp;unit=week 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '28', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:56 GMT', 'x-amzn-RequestId': '305e073c-80ae-4551-8121-a1118e311550', 'x-amz-apigw-id': 'GWKALHMFjoEFYmA=', 'X-Amzn-Trace-Id': 'Root=1-64858a00-0ecfbb2162791c380d2140fb;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 a192cdd2ddabd5b7ef540139bc5d2250.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'uBgOvZmbiWDo82vIdURwFQ-0Xyl4D_NT1cM0jjzTVCqPK3QsYzNOAQ=='} 
+ body={"message": "10 weeks left"} 
+ </msg>
+<msg timestamp="20230611 14:16:56.396" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:56.000" endtime="20230611 14:16:56.396"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:56.396" endtime="20230611 14:16:56.396"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>{"message": "${diffInWeeks} ${unitWeek}s left"}</arg>
+<arg>${response.text}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230611 14:16:56.396" endtime="20230611 14:16:56.397"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230611 14:16:56.397" endtime="20230611 14:16:56.398"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionDataPositiveWeekDiff</tag>
+<status status="PASS" starttime="20230611 14:16:55.998" endtime="20230611 14:16:56.398"/>
+</test>
+<doc>API Testing in Robot Framework</doc>
+<status status="PASS" starttime="20230611 14:16:50.891" endtime="20230611 14:16:56.399"/>
+</suite>
+<suite id="s1-s2" name="regressionResponceMetadata" source="/Users/psuresh/git/BirthdayReminder/TestSuites/Regression/robots/regressionResponceMetadata.robot">
+<test id="s1-s2-t1" name="Do a GET Request and validate the response code" line="12">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:56.403" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:56.403" endtime="20230611 14:16:56.404"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=hour</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:57.062" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:57.062" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '30', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:57 GMT', 'x-amzn-RequestId': 'b5681d69-00a6-4e34-93ce-ad95acc86b49', 'x-amz-apigw-id': 'GWKASHOwjoEF9bA=', 'X-Amzn-Trace-Id': 'Root=1-64858a01-14ec1d6e4918994f7f19cc3b;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 759d3a0d72fa0635da0ce753fe04d650.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'mMRL1iM2tGmNWhdU4hlxJzEMBxzGV0Z0MAkFP2op8dzKeWDTN8Wiyw=='} 
+ body={"message": "3384 hours left"} 
+ </msg>
+<msg timestamp="20230611 14:16:57.062" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:56.404" endtime="20230611 14:16:57.062"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:57.062" endtime="20230611 14:16:57.063"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionValid</tag>
+<status status="PASS" starttime="20230611 14:16:56.403" endtime="20230611 14:16:57.063"/>
+</test>
+<test id="s1-s2-t2" name="Do a GET Request and validate the response data type" line="19">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:57.064" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:57.064" endtime="20230611 14:16:57.064"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=hour</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:58.106" level="INFO">GET Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:58.106" level="INFO">GET Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=hour 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Content-Length': '30', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:58 GMT', 'x-amzn-RequestId': '2d6deeaa-c74f-4144-8a3d-bc5d0d9ded2b', 'x-amz-apigw-id': 'GWKAcGrfDoEFQ-g=', 'X-Amzn-Trace-Id': 'Root=1-64858a02-67a3fecc55a0624a266e9580;Sampled=0;lineage=f2623d03:0', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 a8b26a870e896cf36ea8a2a41f8e6348.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'bKR9HqY1t2dtU2XDKmIFzMyEXrbm9cNIr2ubWk_rINNG0dQPkDpJ1g=='} 
+ body={"message": "3384 hours left"} 
+ </msg>
+<msg timestamp="20230611 14:16:58.106" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230611 14:16:57.064" endtime="20230611 14:16:58.106"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:58.107" endtime="20230611 14:16:58.107"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${jsonText}</var>
+<arg>json.loads('''${response.text}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230611 14:16:58.108" level="INFO">${jsonText} = {'message': '3384 hours left'}</msg>
+<status status="PASS" starttime="20230611 14:16:58.107" endtime="20230611 14:16:58.108"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${isDict}</var>
+<arg>isinstance(${jsontext},(dict))</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230611 14:16:58.108" level="INFO">${isDict} = True</msg>
+<status status="PASS" starttime="20230611 14:16:58.108" endtime="20230611 14:16:58.108"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${isDict}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20230611 14:16:58.108" endtime="20230611 14:16:58.109"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionValid</tag>
+<status status="PASS" starttime="20230611 14:16:57.063" endtime="20230611 14:16:58.109"/>
+</test>
+<doc>API Testing in Robot Framework</doc>
+<status status="PASS" starttime="20230611 14:16:56.400" endtime="20230611 14:16:58.109"/>
+</suite>
+<suite id="s1-s3" name="regressionResponceMethodValidator" source="/Users/psuresh/git/BirthdayReminder/TestSuites/Regression/robots/regressionResponceMethodValidator.robot">
+<test id="s1-s3-t1" name="Do a POST Request and validate the response code for valid data" line="21">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:16:58.114" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:16:58.114" endtime="20230611 14:16:58.114"/>
+</kw>
+<for flavor="IN">
+<var>${units}</var>
+<value>${unitHour}</value>
+<value>${unitDay}</value>
+<value>${unitWeek}</value>
+<value>${unitMonth}</value>
+<iter>
+<var name="${units}">hour</var>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${response}</var>
+<arg>POST On Session</arg>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="POST On Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:58.801" level="INFO">POST Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:58.801" level="INFO">POST Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=403, reason=Forbidden 
+ headers={'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:59 GMT', 'x-amzn-RequestId': '1f7a3c0f-1e66-45b2-aecf-c4844efd20f8', 'x-amzn-ErrorType': 'MissingAuthenticationTokenException', 'x-amz-apigw-id': 'GWKAkGJaDoEFlYg=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 21398bddf40ffbb1d89eefa9af19b88e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'PPWWGPaHxUjitXS89IpdwcBDSnAFMYnxmv4XaUmV3gWu3h3SFGIvoQ=='} 
+ body={"message":"Missing Authentication Token"} 
+ </msg>
+<msg timestamp="20230611 14:16:58.801" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day</msg>
+<status status="FAIL" starttime="20230611 14:16:58.115" endtime="20230611 14:16:58.809"/>
+</kw>
+<msg timestamp="20230611 14:16:58.810" level="INFO">${response} = ('FAIL', 'HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day')</msg>
+<status status="PASS" starttime="20230611 14:16:58.115" endtime="20230611 14:16:58.810"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:58.810" endtime="20230611 14:16:58.810"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:58.115" endtime="20230611 14:16:58.810"/>
+</iter>
+<iter>
+<var name="${units}">day</var>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${response}</var>
+<arg>POST On Session</arg>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="POST On Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:59.269" level="INFO">POST Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:59.270" level="INFO">POST Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=403, reason=Forbidden 
+ headers={'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:46:59 GMT', 'x-amzn-RequestId': 'c3273e1b-12c0-4e26-bd3d-3d8ea8a52250', 'x-amzn-ErrorType': 'MissingAuthenticationTokenException', 'x-amz-apigw-id': 'GWKApEYsjoEFQOw=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 21398bddf40ffbb1d89eefa9af19b88e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'mxsYhi1sn7ddpDgSRgxIX486UZoE0FSdw7fYob9dFaynjeoXFLBD0g=='} 
+ body={"message":"Missing Authentication Token"} 
+ </msg>
+<msg timestamp="20230611 14:16:59.270" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day</msg>
+<status status="FAIL" starttime="20230611 14:16:58.810" endtime="20230611 14:16:59.270"/>
+</kw>
+<msg timestamp="20230611 14:16:59.270" level="INFO">${response} = ('FAIL', 'HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day')</msg>
+<status status="PASS" starttime="20230611 14:16:58.810" endtime="20230611 14:16:59.270"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:59.270" endtime="20230611 14:16:59.271"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:58.810" endtime="20230611 14:16:59.271"/>
+</iter>
+<iter>
+<var name="${units}">week</var>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${response}</var>
+<arg>POST On Session</arg>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="POST On Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:16:59.941" level="INFO">POST Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:16:59.941" level="INFO">POST Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=403, reason=Forbidden 
+ headers={'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:47:00 GMT', 'x-amzn-RequestId': 'a2054be6-5876-45b5-a86c-82e5054b7746', 'x-amzn-ErrorType': 'MissingAuthenticationTokenException', 'x-amz-apigw-id': 'GWKAuEpOjoEFi0g=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 21398bddf40ffbb1d89eefa9af19b88e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'Eis4z9g71w0iduvu8gUMtavei-KsK17JDxb60MHGVQvE87Zl96pprg=='} 
+ body={"message":"Missing Authentication Token"} 
+ </msg>
+<msg timestamp="20230611 14:16:59.941" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day</msg>
+<status status="FAIL" starttime="20230611 14:16:59.271" endtime="20230611 14:16:59.942"/>
+</kw>
+<msg timestamp="20230611 14:16:59.942" level="INFO">${response} = ('FAIL', 'HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day')</msg>
+<status status="PASS" starttime="20230611 14:16:59.271" endtime="20230611 14:16:59.942"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:16:59.942" endtime="20230611 14:16:59.942"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:59.271" endtime="20230611 14:16:59.942"/>
+</iter>
+<iter>
+<var name="${units}">month</var>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${response}</var>
+<arg>POST On Session</arg>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="POST On Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:17:00.746" level="INFO">POST Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:17:00.746" level="INFO">POST Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=403, reason=Forbidden 
+ headers={'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:47:00 GMT', 'x-amzn-RequestId': '04bab7e1-cdaa-4ee6-8835-546ae7490643', 'x-amzn-ErrorType': 'MissingAuthenticationTokenException', 'x-amz-apigw-id': 'GWKA0FrTDoEF2yQ=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 21398bddf40ffbb1d89eefa9af19b88e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'W6cIyiFRlDbWvA-ATZ9rb-wQM9Ybwt6mJg42Zz8d0Y7nmlriSjcb3g=='} 
+ body={"message":"Missing Authentication Token"} 
+ </msg>
+<msg timestamp="20230611 14:17:00.747" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day</msg>
+<status status="FAIL" starttime="20230611 14:16:59.942" endtime="20230611 14:17:00.747"/>
+</kw>
+<msg timestamp="20230611 14:17:00.747" level="INFO">${response} = ('FAIL', 'HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day')</msg>
+<status status="PASS" starttime="20230611 14:16:59.942" endtime="20230611 14:17:00.747"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:17:00.747" endtime="20230611 14:17:00.747"/>
+</kw>
+<status status="PASS" starttime="20230611 14:16:59.942" endtime="20230611 14:17:00.747"/>
+</iter>
+<status status="PASS" starttime="20230611 14:16:58.115" endtime="20230611 14:17:00.747"/>
+</for>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<status status="PASS" starttime="20230611 14:16:58.113" endtime="20230611 14:17:00.748"/>
+</test>
+<test id="s1-s3-t2" name="Do a PUT Request and validate the response code for valid data (+10 From Today)" line="30">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:17:00.749" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:17:00.748" endtime="20230611 14:17:00.749"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${bdate}</var>
+<arg>UTC</arg>
+<arg>+10 days</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:17:00.750" level="INFO">${bdate} = 2023-06-21</msg>
+<status status="PASS" starttime="20230611 14:17:00.749" endtime="20230611 14:17:00.750"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${response}</var>
+<arg>PUT On Session</arg>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="PUT On Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:17:01.692" level="INFO">PUT Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:17:01.692" level="INFO">PUT Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=403, reason=Forbidden 
+ headers={'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:47:01 GMT', 'x-amzn-RequestId': '1a00eb31-e24e-45e0-b1e3-b293debf64ee', 'x-amzn-ErrorType': 'MissingAuthenticationTokenException', 'x-amz-apigw-id': 'GWKA-ERzDoEF3Vg=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 f3f20a29742782b48329d8ac361213ce.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'SwZiPh7huM8ANRIxTCwtuKRNibKPVb3W6NMgNWsm7HRU5PRgiLaU5Q=='} 
+ body={"message":"Missing Authentication Token"} 
+ </msg>
+<msg timestamp="20230611 14:17:01.692" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day</msg>
+<status status="FAIL" starttime="20230611 14:17:00.750" endtime="20230611 14:17:01.693"/>
+</kw>
+<msg timestamp="20230611 14:17:01.693" level="INFO">${response} = ('FAIL', 'HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day')</msg>
+<status status="PASS" starttime="20230611 14:17:00.750" endtime="20230611 14:17:01.693"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:17:01.693" endtime="20230611 14:17:01.693"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<status status="PASS" starttime="20230611 14:17:00.748" endtime="20230611 14:17:01.694"/>
+</test>
+<test id="s1-s3-t3" name="Do a head Request and validate the response code for valid data (+10 From Today)" line="38">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:17:01.695" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:17:01.695" endtime="20230611 14:17:01.695"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${bdate}</var>
+<arg>UTC</arg>
+<arg>+10 days</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:17:01.696" level="INFO">${bdate} = 2023-06-21</msg>
+<status status="PASS" starttime="20230611 14:17:01.695" endtime="20230611 14:17:01.696"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${response}</var>
+<arg>HEAD On Session</arg>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="HEAD On Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Sends a HEAD request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:17:02.517" level="INFO">HEAD Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:17:02.518" level="INFO">HEAD Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=403, reason=Forbidden 
+ headers={'Content-Type': 'application/json', 'Content-Length': '0', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:47:02 GMT', 'x-amzn-RequestId': 'f8235da8-2c68-4aec-9910-2d348b73abc0', 'x-amzn-ErrorType': 'MissingAuthenticationTokenException', 'x-amz-apigw-id': 'GWKBIEkijoEFwEg=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 c2b2b483eb36feea2bdc6fed190132fe.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'Z4AcliAHpb_Ac5wtmed8oGLFhop_-wmN5G7ZVU7ykdF-Ha7aqbyxkg=='} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:17:02.518" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day</msg>
+<status status="FAIL" starttime="20230611 14:17:01.696" endtime="20230611 14:17:02.518"/>
+</kw>
+<msg timestamp="20230611 14:17:02.518" level="INFO">${response} = ('FAIL', 'HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day')</msg>
+<status status="PASS" starttime="20230611 14:17:01.696" endtime="20230611 14:17:02.518"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:17:02.518" endtime="20230611 14:17:02.519"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<status status="PASS" starttime="20230611 14:17:01.694" endtime="20230611 14:17:02.519"/>
+</test>
+<test id="s1-s3-t4" name="Do a delete Request and validate the response code for valid data (+10 From Today)" line="46">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${host}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230611 14:17:02.520" level="INFO">Creating Session using : alias=mysession, url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230611 14:17:02.520" endtime="20230611 14:17:02.520"/>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<var>${bdate}</var>
+<arg>UTC</arg>
+<arg>+10 days</arg>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20230611 14:17:02.521" level="INFO">${bdate} = 2023-06-21</msg>
+<status status="PASS" starttime="20230611 14:17:02.520" endtime="20230611 14:17:02.521"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${response}</var>
+<arg>DELETE On Session</arg>
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="DELETE On Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${endPoint}</arg>
+<arg>params=dateofbirth=1990-10-30&amp;unit=${unitDay}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<msg timestamp="20230611 14:17:03.205" level="INFO">DELETE Request : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ path_url=/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20230611 14:17:03.205" level="INFO">DELETE Response : url=https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day 
+ status=403, reason=Forbidden 
+ headers={'Content-Type': 'application/json', 'Content-Length': '42', 'Connection': 'keep-alive', 'Date': 'Sun, 11 Jun 2023 08:47:03 GMT', 'x-amzn-RequestId': 'fb33cf97-183f-4293-81ea-a587d9545019', 'x-amzn-ErrorType': 'MissingAuthenticationTokenException', 'x-amz-apigw-id': 'GWKBPG5TjoEFx_Q=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 df26f98dc48faec49f463a51b15e8efc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P2', 'X-Amz-Cf-Id': 'rSM7wZxkheF2ODALgWivFceJLULX780r05uw7vAgfS5tT8487oHc8g=='} 
+ body={"message":"Missing Authentication Token"} 
+ </msg>
+<msg timestamp="20230611 14:17:03.205" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day</msg>
+<status status="FAIL" starttime="20230611 14:17:02.521" endtime="20230611 14:17:03.205"/>
+</kw>
+<msg timestamp="20230611 14:17:03.206" level="INFO">${response} = ('FAIL', 'HTTPError: 403 Client Error: Forbidden for url: https://lx8ssktxx9.execute-api.eu-west-1.amazonaws.com/Prod/next-birthday?dateofbirth=1990-10-30&amp;unit=day')</msg>
+<status status="PASS" starttime="20230611 14:17:02.521" endtime="20230611 14:17:03.206"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230611 14:17:03.206" endtime="20230611 14:17:03.206"/>
+</kw>
+<doc>This test case verifies that the response code of the GET Request should be 200,</doc>
+<tag>RegressionDataPositiveDateDiff</tag>
+<status status="PASS" starttime="20230611 14:17:02.519" endtime="20230611 14:17:03.206"/>
+</test>
+<doc>API Testing in Robot Framework</doc>
+<status status="PASS" starttime="20230611 14:16:58.110" endtime="20230611 14:17:03.207"/>
+</suite>
+<status status="PASS" starttime="20230611 14:16:50.868" endtime="20230611 14:17:03.208"/>
+</suite>
+<statistics>
+<total>
+<stat pass="11" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="3" fail="0" skip="0">RegressionDataPositiveDateDiff</stat>
+<stat pass="1" fail="0" skip="0">RegressionDataPositiveMonthDiff</stat>
+<stat pass="1" fail="0" skip="0">RegressionDataPositiveWeekDiff</stat>
+<stat pass="1" fail="0" skip="0">RegressionDataUnits</stat>
+<stat pass="2" fail="0" skip="0">RegressionValid</stat>
+</tag>
+<suite>
+<stat pass="11" fail="0" skip="0" id="s1" name="Robots">Robots</stat>
+<stat pass="5" fail="0" skip="0" id="s1-s1" name="regressionResponceData">Robots.regressionResponceData</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s2" name="regressionResponceMetadata">Robots.regressionResponceMetadata</stat>
+<stat pass="4" fail="0" skip="0" id="s1-s3" name="regressionResponceMethodValidator">Robots.regressionResponceMethodValidator</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
