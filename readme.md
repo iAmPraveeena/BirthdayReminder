@@ -48,6 +48,6 @@ If you prefer a more of a GUI approach you can run
 locust -f TestSuites/Performance/locustFiles/perf.py
 ```
 ### Results samples
-![Test Results](./log.html)
+![Test Results](./log.html){:target="_blank" rel="noopener"}
 ### References
 [Requirements](requirements.pdf)
